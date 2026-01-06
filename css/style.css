@@ -1,0 +1,107 @@
+body {
+  padding-top: 80px;
+}
+
+.navbar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.nav-link {
+  font-weight: 500;
+}
+
+.nav-link.active {
+  text-decoration: underline;
+}
+
+.home {
+  height: calc(100vh - 80px);
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("../assets/bg-clinica.png") center/cover no-repeat;
+}
+
+.login-card {
+  border-radius: 16px;
+}
+
+/* Mobile ajustes */
+@media (max-width: 768px) {
+  .home {
+    height: auto;
+    padding: 60px 0;
+  }
+}
+
+.tratamento-card {
+  background: #dddddc;
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
+  height: 220px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tratamento-card h4 {
+  margin-bottom: 10px;
+}
+
+.tratamento-card .descricao {
+  opacity: 0;
+  font-size: 0.95rem;
+  transition: opacity 0.3s ease;
+}
+
+/* HOVER */
+.tratamento-card:hover {
+  transform: scale(1.07);
+  background: #45e9f5;
+}
+
+.tratamento-card:hover .descricao {
+  opacity: 1;
+}
+
+.profissional-card {
+  background: #e6f7f8;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  height: 320px;
+  position: relative;
+}
+
+.profissional-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* INFO OCULTA */
+.profissional-info {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* HOVER */
+.profissional-card:hover {
+  transform: scale(1.07);
+}
+
+.profissional-card:hover .profissional-info {
+  opacity: 1;
+}

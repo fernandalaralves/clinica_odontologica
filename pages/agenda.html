@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Agenda | Clínica Odontológica</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="./index.html">Clínica Odontológica</a>
+
+        <button
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#menu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html">Início</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tratamentos.html">Tratamentos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sobre.html">Sobre nós</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTEÚDO -->
+    <div class="container">
+      <h2 class="text-center mb-4">Agende sua Consulta</h2>
+
+      <div class="calendar" id="calendar"></div>
+    </div>
+
+    <!-- MODAL LOGIN -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Faça seu login</h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body text-center">
+            <p>Você precisa estar logado para agendar uma consulta.</p>
+            <a href="cadastro.html" class="btn btn-primary">Criar conta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL CONFIRMAÇÃO -->
+    <div class="modal fade" id="confirmModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmar Agendamento</h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body" id="confirmText"></div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button class="btn btn-success" id="confirmBtn">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      const calendar = document.getElementById("calendar");
+      const logged = localStorage.getItem("loggedUser");
+      const blockedDays = [5, 12, 20]; // dias bloqueados
+      let selected = {};
+
+      function createCalendar() {
+        for (let day = 1; day <= 30; day++) {
+          const div = document.createElement("div");
+          div.className = "day";
+          div.innerHTML = `<h6>${day}</h6>`;
+
+          if (blockedDays.includes(day)) {
+            div.classList.add("disabled");
+          } else {
+            div.onclick = () => showHours(day);
+          }
+
+          calendar.appendChild(div);
+        }
+      }
+
+      function showHours(day) {
+        if (!logged) {
+          new bootstrap.Modal(document.getElementById("loginModal")).show();
+          return;
+        }
+
+        const hours = ["08:00", "09:00", "10:00", "14:00", "15:00"];
+        let html = `<p>Horários disponíveis dia <strong>${day}</strong>:</p>`;
+
+        hours.forEach((h) => {
+          html += `<button class="btn btn-outline-primary w-100 hour-btn" onclick="confirmSchedule(${day}, '${h}')">${h}</button>`;
+        });
+
+        document.getElementById("confirmText").innerHTML = html;
+        new bootstrap.Modal(document.getElementById("confirmModal")).show();
+      }
+
+      function confirmSchedule(day, hour) {
+        selected = { day, hour };
+        document.getElementById(
+          "confirmText"
+        ).innerHTML = `Confirmar consulta no dia <strong>${day}</strong> às <strong>${hour}</strong>?`;
+
+        document.getElementById("confirmBtn").onclick = saveSchedule;
+      }
+
+      function saveSchedule() {
+        const schedules = JSON.parse(localStorage.getItem("schedules")) || [];
+        schedules.push(selected);
+        localStorage.setItem("schedules", JSON.stringify(schedules));
+        location.reload();
+      }
+
+      createCalendar();
+    </script>
+  </body>
+
+  <footer class="bg-dark text-light text-center py-4 mt-5">
+    <p class="mb-1">© 2026 Clínica Odontológica</p>
+    <small>Saúde bucal com tecnologia e cuidado</small>
+  </footer>
+</html>

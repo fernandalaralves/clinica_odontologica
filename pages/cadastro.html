@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="../index.html"
+          >Clínica Odontológica</a
+        >
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#menu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+       <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Início</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tratamentos.html">Tratamentos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sobre.html">Sobre nós</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+              
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <form onsubmit="cadastrar(event)">
+      <input class="form-control mb-2" placeholder="Nome" required />
+      <input class="form-control mb-2" placeholder="CPF" required />
+      <input type="date" class="form-control mb-2" required />
+      <input class="form-control mb-2" placeholder="Endereço" required />
+      <input
+        type="password"
+        class="form-control mb-2"
+        placeholder="Senha"
+        required
+      />
+      <input
+        type="password"
+        class="form-control mb-3"
+        placeholder="Confirmar senha"
+        required
+      />
+
+      <button type="submit" class="btn btn-success w-100">Cadastrar</button>
+    </form>
+
+    <script src="/assets/js/auth.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+
+<footer class="bg-dark text-light text-center py-4 mt-5">
+  <p class="mb-1">© 2026 Clínica Odontológica</p>
+  <small>Saúde bucal com tecnologia e cuidado</small>
+</footer>
+
+</html>
