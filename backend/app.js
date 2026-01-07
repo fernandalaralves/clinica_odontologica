@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
+const usuarioRoutes = require("./routes/usuario.routes");
+
 const app = express();
 
 // CONFIGURAÇÕES BÁSICAS
@@ -14,6 +16,9 @@ app.get("/status", (req, res) => {
     message: "Back-end da Clínica Odontológica está ativo!",
   });
 });
+
+// ROTAS DE USUÁRIO
+app.use("/usuario", usuarioRoutes);
 
 // PORTA DO SERVIDOR
 const PORT = 3000;
