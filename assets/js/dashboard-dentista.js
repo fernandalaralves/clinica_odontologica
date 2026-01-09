@@ -1,26 +1,15 @@
-const agenda = JSON.parse(localStorage.getItem("agenda")) || {};
-const tabela = document.getElementById("tabela");
+import { listarUsuarios } from "../../services/usuarioService";
 
-for (let dia in agenda) {
-  agenda[dia].forEach((horario) => {
-    const tr = document.createElement("tr");
+const lista = document.getElementById("lista-usuarios");
 
-    tr.innerHTML = `
-      <td>${dia}</td>
-      <td>${horario}</td>
-      <td>
-        <button class="btn btn-danger btn-sm" onclick="cancelar(${dia}, '${horario}')">
-          Cancelar
-        </button>
-      </td>
-    `;
+function carregarUsuarios() {
+  const usuarios = listarUsuarios();
 
-    tabela.appendChild(tr);
+  usuarios.forEach((usuario) => {
+    const li = document.createElement("li");
+    li.textContent = `${usuario.nome} - ${usuario.email}`;
+    lista.appendChild(li);
   });
 }
 
-function cancelar(dia, horario) {
-  agenda[dia].push(horario);
-  localStorage.setItem("agenda", JSON.stringify(agenda));
-  location.reload();
-}
+carregarUsuarios();
