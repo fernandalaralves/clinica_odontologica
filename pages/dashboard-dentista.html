@@ -7,9 +7,23 @@
     <link rel="stylesheet" href="../styles/dashboard-dentista.css" />
   </head>
   <body>
-    <h1>Usuários</h1>
-    <ul id="lista-usuarios"></ul>
+    <header>
+      <h1>Agenda do Dia</h1>
+      <span>Dentista: Dr(a). Ana</span>
+    </header>
 
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Horário</th>
+            <th>Paciente</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-agenda"></tbody>
+      </table>
+    </main>
     <script src="../scripts/dashboard-dentista.js"></script>
   </body>
 </html>
