@@ -1,16 +1,15 @@
 const agendaMock = [
-  { id: 1, horario: "08:00", paciente: "Maria Silva" },
-  { id: 2, horario: "09:00", paciente: "João Souza" },
-  { id: 3, horario: "10:00", paciente: "Ana Lima" },
+  { id: 1, data: "2026-01-08", horario: "08:00", paciente: "Maria Silva" },
+  { id: 2, data: "2026-01-08", horario: "09:00", paciente: "João Souza" },
+  { id: 3, data: "2026-01-09", horario: "10:00", paciente: "Ana Lima" },
 ];
 
-function listarAgenda() {
-  return agendaMock;
+function listarAgendaPorData(dataSelecionada) {
+  return agendaMock.filter((c) => c.data === dataSelecionada);
 }
 
 function cancelarConsulta(id) {
   console.log("Consulta cancelada:", id);
 }
 
-//depois trocamos por fetch para conectar com o back end
-export { listarAgenda, cancelarConsulta };
+export { listarAgendaPorData, cancelarConsulta };

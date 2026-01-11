@@ -1,20 +1,38 @@
-import { listarAgenda } from "../../services/agendaService.js";
+import {
+  listarAgendaPorData,
+  cancelarConsulta,
+} from "../services/agendaService.js";
 
 const tabela = document.getElementById("tabela-agenda");
+const inputData = document.getElementById("data");
+const btnFiltrar = document.getElementById("btn-filtrar");
 
-function carregarAgenda() {
-  const agenda = listarAgenda();
+function limparTabela() {
+  tabela.innerHTML = "";
+}
+
+function carregarAgenda(data) {
+  limparTabela();
+
+  const agenda = listarAgendaPorData(data);
+
+  if (agenda.length === 0) {
+    tabela.innerHTML = `
+      <tr>
+        <td colspan="3">Nenhuma consulta para esta data</td>
+      </tr>
+    `;
+    return;
+  }
 
   agenda.forEach((consulta) => {
     const tr = document.createElement("tr");
-
-    // Preenchendo a linha da tabela com os dados da consulta
 
     tr.innerHTML = `
       <td>${consulta.horario}</td>
       <td>${consulta.paciente}</td>
       <td>
-        <button onclick="cancelarConsulta(${consulta.id})">Cancelar</button>
+        <button onclick="cancelar(${consulta.id})">Cancelar</button>
       </td>
     `;
 
@@ -22,11 +40,15 @@ function carregarAgenda() {
   });
 }
 
-// Função para cancelar consulta (simulação)
+btnFiltrar.addEventListener("click", () => {
+  if (!inputData.value) {
+    alert("Selecione uma data");
+    return;
+  }
+  carregarAgenda(inputData.value);
+});
 
 window.cancelar = function (id) {
   cancelarConsulta(id);
-  alert("Consulta cancelada com sucesso!");
+  alert("Consulta cancelada!");
 };
-
-carregarAgenda();

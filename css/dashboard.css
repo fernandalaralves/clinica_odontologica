@@ -38,3 +38,17 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.filtro {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filtro input {
+  padding: 6px;
+}
+
+.filtro button {
+  background: #2f80ed;
+}
